@@ -16,20 +16,17 @@ h1{margin:0;color:#ffccff;flex:1;cursor:pointer;font-size:1.5em;text-shadow:0 0 
 .producto{padding:20px;border-radius:12px;margin:15px 0;color:white;transition:0.4s;background:linear-gradient(145deg,#000,#330066);box-shadow:0 0 15px rgba(102,0,102,0.5);}
 .producto:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(204,153,255,0.7);}
 .product-img{width:100%;height:120px;background:linear-gradient(90deg,#220044,#6600cc);color:#ffccff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1em;border-radius:8px;text-transform:uppercase;transition:0.3s;}
+.product-img img{width:100%;height:100%;border-radius:8px;object-fit:cover;}
 .product-img:hover{background:linear-gradient(90deg,#6600cc,#220044);}
 input,select,button,textarea{width:95%;padding:12px;margin:8px 0;border-radius:10px;border:none;font-size:1em;}
 input,select,textarea{background:#330066;color:white}
 button{background:#cc99ff;color:black;font-weight:bold;cursor:pointer;transition:0.3s;font-size:1em}
 button:hover{background:#ddbbff}
-
-/* MODAL KEYS */
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:3000;display:none;}
 .modal-content{background:#440088;padding:25px;border-radius:20px;text-align:center;min-width:300px;box-shadow:0 0 30px #ff99ff, 0 0 60px #cc66ff inset;animation:slideIn 0.5s ease forwards;}
 .modal-content p{font-size:1.4em;color:#ffccff;word-break:break-all;margin-bottom:15px;font-weight:bold;}
 .modal-content button{margin:10px;padding:10px 20px;border-radius:12px;font-weight:bold;cursor:pointer;}
 @keyframes slideIn{0%{transform:scale(0.5) rotateX(-90deg);opacity:0}100%{transform:scale(1) rotateX(0);opacity:1}}
-
-/* WhatsApp soporte */
 .soporte{position:fixed;bottom:20px;right:20px;background:#25D366;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(0,0,0,0.5);z-index:2002;cursor:pointer;}
 .soporte img{width:35px;height:35px;}
 </style>
@@ -51,7 +48,7 @@ button:hover{background:#ddbbff}
 <a onclick="closeNav()">Cerrar Menú</a>
 </div>
 
-<div id="registerBox" class="box">
+<div id="registerBox" class="box" style="display:block">
 <h2>Registro</h2>
 <input id="regUser" placeholder="Usuario">
 <input id="regEmail" placeholder="Correo">
@@ -64,9 +61,7 @@ button:hover{background:#ddbbff}
 <h2>Iniciar Sesión</h2>
 <input id="loginEmail" placeholder="Correo">
 <input id="loginPass" type="password" placeholder="Contraseña">
-<label style="display:block;margin:5px 0">
-<input type="checkbox" id="recordarme"> Recordarme
-</label>
+<label style="display:block;margin:5px 0"><input type="checkbox" id="recordarme"> Recordarme</label>
 <button onclick="login()">Entrar</button>
 <p><a onclick="mostrarRegister()">Regístrate</a></p>
 </div>
@@ -75,7 +70,6 @@ button:hover{background:#ddbbff}
 <div id="contenido"></div>
 </div>
 
-<!-- MODAL DE KEY -->
 <div id="keyModal" class="modal">
 <div class="modal-content" id="keyModalContent">
 <p id="keyText"></p>
@@ -84,10 +78,10 @@ button:hover{background:#ddbbff}
 </div>
 </div>
 
-<!-- Botón soporte WhatsApp -->
 <div class="soporte" onclick="window.open('https://wa.me/573008405256','_blank')">
 <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
 </div>
+
 <script>
 // --- VARIABLES ---
 let currentUser=null;
@@ -178,7 +172,7 @@ loginBox.style.display="none";
 dashboard.style.display="block";
 abrirPrincipal();
 }
-
+<script>
 // --- FUNCIONES DEL MENU ---
 function abrirPrincipal(){ 
 let user=JSON.parse(localStorage.getItem(currentUser));
@@ -220,7 +214,7 @@ function abrirProductos(){
             <select id="duracion_${index}">
                 ${opciones}
             </select>
-            <button onclick="generateKey('${p.name}', ${index})">Generate Key</button>
+            <button onclick="generateKey('${p.name}', ${index})">Generar Key</button>
         </div>`;
     });
     contenido.innerHTML = html;
@@ -274,7 +268,7 @@ contenido.innerHTML=`<h2>Panel Admin</h2>
 <textarea id="adminKeys" placeholder="Separadas por coma, puedes añadir duración como 'ABC123 - 1 DIA'"></textarea>
 <button onclick="adminAgregarKeys()">Agregar Keys</button>
 
-<p>Publicar Keys Globales (Disponibles para todos)</p>
+<p>Publicar Keys Globales</p>
 <input id="globalProducto" placeholder="Producto">
 <textarea id="globalKeys" placeholder="Separadas por coma, con duración 'ABC123 - 7 DIAS'"></textarea>
 <button onclick="adminAgregarKeysGlobal()">Publicar Keys Globales</button>
@@ -360,4 +354,4 @@ closeNav();
 }
 </script>
 </body>
-  </html>
+</html>
